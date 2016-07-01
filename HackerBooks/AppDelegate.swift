@@ -8,6 +8,13 @@
 
 import UIKit
 
+let jsonFileName = "books_readable.json"
+let jsonUrl="https://keepcodigtest.blob.core.windows.net/containerblobstest/"   // Url to get json file
+
+
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +22,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        /*
+        let data = NSData(contentsOfURL: NSURL(string: "https://keepcodigtest.blob.core.windows.net/containerblobstest/books_readable.json")!)
+        
+        guard let mierda = data else{
+            print("NO HAY NADA")
+            fatalError("A tomar por el culo")
+        }
+        
+        print(mierda)
+        */
+        
+        
+        
+        
+        /* Clase del manejo y descarga de ficheros */
+        let res = ResourceFileManager(jsonFileName: jsonFileName,
+                                  jsonUrl: jsonUrl)
+        
+        //-- Hacemos el proceso de cargar los json
+        
+        do{
+            try res.cargaJSON()
+        }catch{
+            fatalError("Data couldn't be loaded")
+        }
+        
+        
+        
+        
+        
         return true
     }
 

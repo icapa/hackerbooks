@@ -8,20 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		CF0D126F1D25B41800B4A458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D126E1D25B41800B4A458 /* AppDelegate.swift */; };
-		CF0D12711D25B41800B4A458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D12701D25B41800B4A458 /* ViewController.swift */; };
-		CF0D12741D25B41800B4A458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF0D12721D25B41800B4A458 /* Main.storyboard */; };
 		CF0D12761D25B41800B4A458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF0D12751D25B41800B4A458 /* Assets.xcassets */; };
-		CF0D12791D25B41800B4A458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF0D12771D25B41800B4A458 /* LaunchScreen.storyboard */; };
+		CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */; };
+		CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */; };
+		CFFF37C81D26D5D7004E00AD /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C71D26D5D7004E00AD /* Foundation.swift */; };
+		CFFF37D21D271FC8004E00AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFFF37D01D271FC8004E00AD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CF0D126B1D25B41800B4A458 /* HackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0D126E1D25B41800B4A458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CF0D12701D25B41800B4A458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CF0D12731D25B41800B4A458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF0D12751D25B41800B4A458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CF0D12781D25B41800B4A458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF0D127A1D25B41800B4A458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceFileManager.swift; sourceTree = "<group>"; };
+		CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHackerBooks.swift; sourceTree = "<group>"; };
+		CFFF37C71D26D5D7004E00AD /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		CFFF37CA1D271A26004E00AD /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		CFFF37D11D271FC8004E00AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HackerBooks/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +43,7 @@
 			children = (
 				CF0D126D1D25B41800B4A458 /* HackerBooks */,
 				CF0D126C1D25B41800B4A458 /* Products */,
+				CFFF37D01D271FC8004E00AD /* LaunchScreen.storyboard */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +58,47 @@
 		CF0D126D1D25B41800B4A458 /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				CFFF37C91D26D7B0004E00AD /* Framework */,
+				CFFF37C11D26D10C004E00AD /* Misc */,
+				CFFF37C01D26D106004E00AD /* Controllers */,
+				CFFF37BF1D26D100004E00AD /* Models */,
 				CF0D126E1D25B41800B4A458 /* AppDelegate.swift */,
-				CF0D12701D25B41800B4A458 /* ViewController.swift */,
-				CF0D12721D25B41800B4A458 /* Main.storyboard */,
 				CF0D12751D25B41800B4A458 /* Assets.xcassets */,
-				CF0D12771D25B41800B4A458 /* LaunchScreen.storyboard */,
 				CF0D127A1D25B41800B4A458 /* Info.plist */,
+				CFFF37CA1D271A26004E00AD /* MyPlayground.playground */,
 			);
 			path = HackerBooks;
+			sourceTree = "<group>";
+		};
+		CFFF37BF1D26D100004E00AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		CFFF37C01D26D106004E00AD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		CFFF37C11D26D10C004E00AD /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */,
+				CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		CFFF37C91D26D7B0004E00AD /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				CFFF37C71D26D5D7004E00AD /* Foundation.swift */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,9 +159,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF0D12791D25B41800B4A458 /* LaunchScreen.storyboard in Resources */,
 				CF0D12761D25B41800B4A458 /* Assets.xcassets in Resources */,
-				CF0D12741D25B41800B4A458 /* Main.storyboard in Resources */,
+				CFFF37D21D271FC8004E00AD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,26 +171,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF0D12711D25B41800B4A458 /* ViewController.swift in Sources */,
 				CF0D126F1D25B41800B4A458 /* AppDelegate.swift in Sources */,
+				CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */,
+				CFFF37C81D26D5D7004E00AD /* Foundation.swift in Sources */,
+				CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CF0D12721D25B41800B4A458 /* Main.storyboard */ = {
+		CFFF37D01D271FC8004E00AD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CF0D12731D25B41800B4A458 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CF0D12771D25B41800B4A458 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF0D12781D25B41800B4A458 /* Base */,
+				CFFF37D11D271FC8004E00AD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -288,6 +318,7 @@
 				CF0D127F1D25B41800B4A458 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
