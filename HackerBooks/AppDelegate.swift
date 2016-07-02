@@ -23,33 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        /*
-        let data = NSData(contentsOfURL: NSURL(string: "https://keepcodigtest.blob.core.windows.net/containerblobstest/books_readable.json")!)
-        
-        guard let mierda = data else{
-            print("NO HAY NADA")
-            fatalError("A tomar por el culo")
-        }
-        
-        print(mierda)
-        */
         
         
-        
-        
-        /* Clase del manejo y descarga de ficheros */
+        //--- Todo esto hace la carga del fichero desde internet ---
         let res = ResourceFileManager(jsonFileName: jsonFileName,
                                   jsonUrl: jsonUrl)
-        
-        //-- Hacemos el proceso de cargar los json
-        
         do{
-            try res.cargaJSON()
+            try res.descargaJSON()  // La descarga o lee de local, lo que haga falta
+            let json = try loadFromLocalFile(resource: res)
+            var theBooks = [Book]()
+            for jsonBook in json{
+                let book = try decode(book: jsonBook,resource: res)
+                theBooks.append(book)
+                
+            }
+            
+            
         }catch{
             fatalError("Data couldn't be loaded")
         }
-        
-        
         
         
         

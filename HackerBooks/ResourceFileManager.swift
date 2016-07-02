@@ -46,7 +46,7 @@ class ResourceFileManager {
         }
     }
     
-    //MARK: - Files
+    //MARK: - JSON
     
     
     // Esto descarga el json
@@ -66,12 +66,14 @@ class ResourceFileManager {
     
     func loadJSONFile() throws -> NSData{
         var url : NSURL
+        var newUrl : NSURL
         do{
-            try url = getUrlLocalFileSystem(file: self.jsonFileName)
+            try url = getUrlLocalFileSystem()
+            newUrl = url.URLByAppendingPathComponent(self.jsonFileName)
         }catch{
             throw ErrorHackerBooks.urlResourceNotFound
         }
-        let datos = NSData(contentsOfURL: url)
+        let datos = NSData(contentsOfURL: newUrl)
         guard let data = datos else{
             throw ErrorHackerBooks.urlResourceNotFound
         }
@@ -79,7 +81,7 @@ class ResourceFileManager {
         
     }
     
-    func cargaJSON() throws {
+    func descargaJSON() throws {
         
         // Si es la primera vez
         if isFirstLaunch()==true{
@@ -101,23 +103,95 @@ class ResourceFileManager {
     // Guarda el fichero
     func saveJSONFile(withData data: NSData) throws {
         var url: NSURL
+        var newUrl: NSURL
         do{
-            try url = getUrlLocalFileSystem(file: self.jsonFileName)
+            try url = getUrlLocalFileSystem()
+            newUrl = url.URLByAppendingPathComponent(self.jsonFileName)
         }catch{
             throw ErrorHackerBooks.urlResourceNotFound
         }
         
         
-        guard data.writeToURL(url, atomically: true) else{
+        guard data.writeToURL(newUrl, atomically: true) else{
             print("No se pudo guardar")
             throw ErrorHackerBooks.urlResourceNotFound
             
         }
         
     }
+
+    
+    
+    
+    
+    
+    //MARK: Book Resources download
+    // Global load, remote or local
+    func loadResource(withUrl url: NSURL) throws -> NSData{
+        var data : NSData
+        do{
+            data = try loadLocalResource(withUrl: url)
+            return data
+        }catch{
+            // No esta en local, descargamos de remoto
+            do{
+                data = try loadRemoteResource(withUrl: url)
+                // Fue bien asi que guardamos en disco
+                try saveResource(withUrl: url, andData: data)
+                return data
+            }
+            catch{
+                throw ErrorHackerBooks.urlResourceNotFound
+            }
+        }
+        
+    }
+    
+    // Load resource from local
+    func loadLocalResource(withUrl remoteUrl: NSURL) throws -> NSData{
+        do{
+            
+            let path = try getUrlLocalFileSystem()
+            guard let fileName = remoteUrl.lastPathComponent else{
+                throw ErrorHackerBooks.wrongLocalResource
+            }
+            
+            let newUrl = path.URLByAppendingPathComponent(fileName)
+            let data = NSData(contentsOfURL: newUrl)
+            guard let losDatos = data else{
+                throw ErrorHackerBooks.wrongLocalResource
+            }
+            return losDatos
+        }
+        catch{
+            throw ErrorHackerBooks.wrongLocalResource
+        }
+    }
+    
+    // Load Remote resource
+    func loadRemoteResource(withUrl url: NSURL) throws -> NSData{
+        let data = NSData(contentsOfURL: url)
+        guard let dat = data else{
+            throw ErrorHackerBooks.urlResourceNotFound
+        }
+        return dat
+    }
+    
+   
+     // Save resource
+    func saveResource(withUrl url: NSURL, andData data: NSData) throws {
+        var newUrl: NSURL
+        let path = try! getUrlLocalFileSystem()
+        newUrl = (path.URLByAppendingPathComponent(url.lastPathComponent!))
+        guard data.writeToURL(newUrl, atomically: true) else{
+            print("No se pudo guardar")
+            throw ErrorHackerBooks.urlResourceNotFound
+        }
+    }
+   
     
     //MARK: - Utils
-    func getUrlLocalFileSystem(file file: String) throws -> NSURL{
+    func getUrlLocalFileSystem() throws -> NSURL{
         let fm = NSFileManager.defaultManager()
         
         var url: NSURL?
@@ -126,8 +200,7 @@ class ResourceFileManager {
         guard let laUrl = url else{
             throw ErrorHackerBooks.urlResourceNotFound
         }
-        let newUrl = laUrl.URLByAppendingPathComponent(self.jsonFileName)
-        return newUrl
+        return laUrl
     }
    
 }
