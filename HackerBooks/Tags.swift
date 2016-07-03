@@ -10,11 +10,12 @@ import Foundation
 
 class Tags: CustomStringConvertible{
     
+    // Para inicializar
     var tags: Set = [""]
     
     //MARK: - Inicialitation
     init(){
-        self.tags = [""]
+        self.tags.remove("")
     }
     
     convenience init(withTags newTags :[String]){

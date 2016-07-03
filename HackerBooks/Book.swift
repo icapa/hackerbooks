@@ -9,21 +9,21 @@
 import Foundation
 import UIKit
 
-class Book {
+class Book : Comparable{
     
     //MARK: - Stored properties
     // Los primeros son oblitatorios
     let title       : String
     let authors     :[String]
     let tags        : Tags
-    let image       : UIImage
-    let pdf         : NSData
+    let image       : UIImage?
+    let pdf         : NSData?
     // El favorito de momento lo marco a falso
     var isFavorite    : Bool? = false
     
     //MARK: - Inicializadores
     init(title : String, authors: [String],
-         tags: Tags, image: UIImage, pdf: NSData){
+         tags: Tags, image: UIImage?, pdf: NSData?){
         self.title=title
         self.authors=authors
         self.tags=tags
@@ -44,5 +44,26 @@ class Book {
         
     }
     
+    var proxyForComparison : String{
+        get{
+            return "\(title)"
+        }
+    }
+    var proxyForSorting : String{
+        get{
+            return proxyForComparison
+        }
+    }
+    
+    
     
 }
+//MARK: - Equatable & Comparable
+func == (lhs: Book, rhs: Book) -> Bool{
+    return lhs.proxyForComparison == rhs.proxyForComparison
+}
+
+func  < (lhs: Book, rhs: Book) -> Bool{
+    return lhs.proxyForSorting < rhs.proxyForSorting
+}
+

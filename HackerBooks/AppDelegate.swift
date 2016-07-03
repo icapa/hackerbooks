@@ -8,8 +8,7 @@
 
 import UIKit
 
-let jsonFileName = "books_readable.json"
-let jsonUrl="https://keepcodigtest.blob.core.windows.net/containerblobstest/"   // Url to get json file
+
 
 
 
@@ -24,25 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
-        
-        //--- Todo esto hace la carga del fichero desde internet ---
-        let res = ResourceFileManager(jsonFileName: jsonFileName,
-                                  jsonUrl: jsonUrl)
+        /* Carga del json y parseado */
         do{
-            try res.descargaJSON()  // La descarga o lee de local, lo que haga falta
-            let json = try loadFromLocalFile(resource: res)
-            var theBooks = [Book]()
-            for jsonBook in json{
-                let book = try decode(book: jsonBook,resource: res)
-                theBooks.append(book)
-                
-            }
-            
-            
+            try downloadJSONifNeeded()
         }catch{
             fatalError("Data couldn't be loaded")
         }
         
+        _ = Library()
         
         
         return true

@@ -30,7 +30,7 @@ typealias JSONArray         = [JSONDictionary]
 
 // Devuelve un libro
 
-func decode (book json: JSONDictionary, resource res: ResourceFileManager) throws -> Book{
+func decode (book json: JSONDictionary) throws -> Book{
     guard let authorsStr = json["authors"] as? String,
     imageUrl = NSURL(string: (json["image_url"] as? String)!),
     pdfUrl = NSURL(string: (json["pdf_url"] as? String)!),
@@ -45,25 +45,32 @@ func decode (book json: JSONDictionary, resource res: ResourceFileManager) throw
     
     
     // Convertimos primero los tags, tenemos una clase para ello
+    // Quito los espacios al final y principio
+    
     let arrayTags = theTags.characters.split(",").map(String.init)
-    let tag = Tags(withTags: arrayTags)
+    var extraArray = [String]()
+    for t in arrayTags{
+        extraArray.append(t.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
+    }
+    
+    let tag = Tags(withTags: extraArray)
     
     // Descargamos o leemos la imagen
     
     // Descargamos o leemos el pdf
-    var theImage : UIImage
+    var theImage : UIImage?
     do{
-        let imageData = try res.loadResource(withUrl: imageUrl)
+        let imageData = try loadResource(withUrl: imageUrl)
         theImage = UIImage(data: imageData)!
         
     }catch{
-        throw ErrorHackerBooks.wrongLocalResource
+        theImage=nil
     }
-    var pdfData : NSData
+    var pdfData : NSData?
     do{
-        pdfData = try res.loadResource(withUrl: pdfUrl)
+        pdfData = try loadResource(withUrl: pdfUrl)
     }catch{
-        throw ErrorHackerBooks.wrongLocalResource
+        pdfData=nil
     }
     
     return Book(title: theTitle, authors: authorsList, tags: tag, image: theImage, pdf: pdfData)
@@ -73,10 +80,10 @@ func decode (book json: JSONDictionary, resource res: ResourceFileManager) throw
 }
 
 
-func loadFromLocalFile(resource res: ResourceFileManager) throws -> JSONArray{
+func loadJSONFromLocalFile() throws -> JSONArray{
     var data : NSData
     do{
-        try data = res.loadJSONFile()
+        try data = loadJSONFile()
         if let maybeArray = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? JSONArray,
             array = maybeArray{
                 return array

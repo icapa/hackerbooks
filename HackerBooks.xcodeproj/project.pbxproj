@@ -12,6 +12,7 @@
 		CF4FEFA71D2804A000E68269 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA61D2804A000E68269 /* Book.swift */; };
 		CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA81D280BA600E68269 /* Tags.swift */; };
 		CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */; };
+		CF4FEFAD1D28877700E68269 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAC1D28877700E68269 /* Library.swift */; };
 		CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */; };
 		CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */; };
 		CFFF37C81D26D5D7004E00AD /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C71D26D5D7004E00AD /* Foundation.swift */; };
@@ -26,6 +27,7 @@
 		CF4FEFA61D2804A000E68269 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CF4FEFA81D280BA600E68269 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
+		CF4FEFAC1D28877700E68269 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceFileManager.swift; sourceTree = "<group>"; };
 		CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHackerBooks.swift; sourceTree = "<group>"; };
 		CFFF37C71D26D5D7004E00AD /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				CF4FEFA61D2804A000E68269 /* Book.swift */,
 				CF4FEFA81D280BA600E68269 /* Tags.swift */,
 				CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */,
+				CF4FEFAC1D28877700E68269 /* Library.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */,
 				CFFF37C81D26D5D7004E00AD /* Foundation.swift in Sources */,
 				CF4FEFA71D2804A000E68269 /* Book.swift in Sources */,
+				CF4FEFAD1D28877700E68269 /* Library.swift in Sources */,
 				CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */,
 				CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */,
 			);
