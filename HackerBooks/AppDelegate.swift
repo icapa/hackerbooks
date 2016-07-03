@@ -22,15 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
-        /* Carga del json y parseado */
         do{
             try downloadJSONifNeeded()
         }catch{
             fatalError("Data couldn't be loaded")
         }
         
-        _ = Library()
+        let theLibrary = Library()
+        
+        theLibrary.bookCountForTag("programming")
+        
         
         
         return true

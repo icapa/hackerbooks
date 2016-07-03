@@ -9,7 +9,7 @@
 // La informacion que tenemos
 let jsonFileName = "books_readable.json"
 let jsonUrl="https://keepcodigtest.blob.core.windows.net/containerblobstest/"   // Url to get json file
-
+let favoritesFile="favorites.txt"
 
 import Foundation
 
@@ -181,7 +181,44 @@ func saveResource(withUrl url: NSURL, andData data: NSData) throws {
         throw ErrorHackerBooks.urlResourceNotFound
     }
 }
-   
+
+//MARK: - Favorites
+
+func loadFavoritesFile() -> Set<String> {
+    var elSet = Set<String>()
+    var url : NSURL
+    var newUrl : NSURL
+    
+    try! url = getUrlLocalFileSystem(fromPath: .documentDirectory)
+    newUrl = url.URLByAppendingPathComponent(favoritesFile)
+    
+    
+    let elArray = NSArray(contentsOfURL: newUrl)     // Si no hay nada devuelvo vacio el set
+    guard let a = elArray else{
+        return elSet
+    }
+    for b in a{
+        elSet.insert(b as! String)
+    }
+    return elSet
+}
+
+func saveFavoritesFile(withFile file: Set<String>){
+    var listaStrings = [String]()
+    for i in file{
+        listaStrings.append(i)
+    }
+    var url: NSURL
+    var newUrl : NSURL
+    try! url = getUrlLocalFileSystem(fromPath: .documentDirectory)
+    newUrl = url.URLByAppendingPathComponent(favoritesFile)
+    let elArray : NSArray = listaStrings as NSArray
+    elArray.writeToURL(newUrl, atomically: true)
+    
+}
+
+
+
     
 //MARK: - Utils
 func getUrlLocalFileSystem(fromPath path: FileSystemDirectory) throws -> NSURL{

@@ -11,16 +11,33 @@ import Foundation
 class Tags: CustomStringConvertible{
     
     // Para inicializar
-    var tags: Set = [""]
+    var tags = Set<String>()
+    
+    
+    //MARK: - Properties
+    var count : Int{
+        get{
+            return tags.count
+        }
+    }
     
     //MARK: - Inicialitation
     init(){
-        self.tags.remove("")
+        // En principio init no hace nada
+        
     }
     
     convenience init(withTags newTags :[String]){
         self.init()
         addTags(tags: newTags)
+    }
+    
+    //MARK: - tags
+    func doesTagExist(text : String?) -> Bool {
+        guard let t=text else{
+            return false
+        }
+        return tags.contains(t)
     }
     
     //MARK: - Add tags
