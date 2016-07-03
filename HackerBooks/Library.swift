@@ -8,8 +8,16 @@
 
 import Foundation
 class Library {
+    //MARK: Utility types
+    typealias BookArray =   [Book]
+    typealias BookDictionary = [String: BookArray]
+    
+    
+    // Dictionario completo
+    var dict: BookDictionary = BookDictionary()
+    
     //MARK: Stored properties
-    var books   : [Book]?           // Los libros
+    var books   : BookArray?            // Los libros
     var tags    : Tags?             // Lista de los tags
     var favorites = Set<String>()
     
@@ -34,76 +42,108 @@ class Library {
     //MARK: - Initializacion
     init(){
         tags = Tags()
+        
+        books = BookArray()
+        
         do{
             let json = try loadJSONFromLocalFile()
-            var theBooks = [Book]()
+            self.favorites = loadFavoritesFile()
             for jsonBook in json{
                 do{
                     let book = try decode(book: jsonBook)
-                    theBooks.append(book)
+                    // Miro si tengo que meterlo en favoritos
+                    book.isFavorite = self.favorites.contains(book.title)
+                    
+                    books?.append(book)
+                    
+                    
+                    // Meto en cada dictionario por tags
+                    for t in book.tags.tagToOrderArray(){
+                        if var d = dict[t]{ // Si existe el diccionario inserto
+                            d.append(book)
+                            dict[t]=d
+                        }else{
+                            // Si no tengo que crearlo, y lo añado
+                            dict[t] = BookArray()
+                            // Fuerzo pq le acabo de crear
+                            dict[t]!.append(book)
+                        }
+                        
+                    }
+                    
+                    // Meto en el dictionario si es favorito
+                    if book.isFavorite == true{
+                        if var f = dict["Favorite"] {
+                            f.append(book)
+                            dict["Favorite"]=f
+                        }else{
+                            dict["Favorite"] = BookArray()
+                            dict["Favorite"]!.append(book)
+                        
+                        }
+                    }
+        
+                    // Guardo los tags para posterior uso
                     tags?.addTags(tags: book.tags.tagToOrderArray())
                     let desc = tags?.description
                     print("\(desc)")
+ 
                 
                 }catch{
                     print ("Failed json element \(jsonBook)")
                 }
+                // Vamos a hacer debug
+                
             }
-            self.books=theBooks
-            self.favorites = loadFavoritesFile()
+            
         }catch{
             
         }
-        // Leemos los favoritos guardados
-        
     }
     //MARK: - Table requirements
+    // Libros para un tag
     func bookCountForTag (tag: String?) -> Int{
-        guard let book = booksForTag(tag) else {
+        guard let b = dict[tag!] else{
             return 0
         }
-        return book.count
-    }
-    func booksForTag (tag: String?) -> [Book]?{
-        var theBooks = [Book]()
-        guard let b = self.books else{
-            return nil
-        }
-        for oneBook in b{
-            if tag=="Favorites"{    // El tag favorito es distingo
-                if (oneBook.isFavorite==true){
-                    theBooks.append(oneBook)
-                }
-            }
-            else{
-                if oneBook.tags.doesTagExist(tag){
-                    theBooks.append(oneBook)
-                }
-            }
-        }
-        
-        if theBooks.count==0{
-            return nil
-        }
-        return theBooks
+        return b.count
     }
     
+    // Array de libros para un tag
+    func booksForTag (tag: String?) -> BookArray?{
+        guard let t = tag else{
+            return nil
+        }
+        guard let a = dict[t] else{
+            return nil
+        }
+        return a
+    }
+    // Libro en un indice y un tag
     func bookAtIndex(index: Int, tag: String?) -> Book?{
-        guard let b = booksForTag(tag) else{
+        guard let t = tag else{
             return nil
         }
-        let theBook : Book? = b[index]
-        guard let tb = theBook else{
+        guard let bookDict = dict[t] else{
             return nil
         }
-        return tb
+        return bookDict[index]
     }
 
     
 }
-//MASK: - Extensions
+//MARK: - Extensions
 extension Library {
     func saveFavoritesToFile() {
         saveFavoritesFile(withFile: self.favorites)
+    }
+    func debugDictionary() {
+        for t in tags!.tagToOrderArray(){
+            print("----------------------")
+            print("\(t) ->")
+            for a in dict[t]!{
+                print("- \t\(a.title)")
+            }
+        }
     }
 }
