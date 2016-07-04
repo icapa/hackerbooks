@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = splitVc
         
         // Asignamos delegados...
-        // TODO
         
         // Mostramos la ventana
         window?.makeKeyAndVisible()

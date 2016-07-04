@@ -18,7 +18,7 @@ class Book : Comparable, Hashable{
     let tags        : Tags
     let image       : NSURL
     let pdf         : NSURL
-    var isFavorite    : Bool? = false
+    var isFavorite    : Bool?
     //MARK: - Private Image,Pdf
     private var dataImg: UIImage?
     private var dataPdf : NSData?
@@ -80,8 +80,12 @@ class Book : Comparable, Hashable{
                   image: image,
                   pdf: pdf)
         self.isFavorite = favorite
-        
     }
+    
+    func setFavorite(fav : Bool){
+        self.isFavorite=fav
+    }
+    
     
     var proxyForComparison : String{
         get{
@@ -93,6 +97,7 @@ class Book : Comparable, Hashable{
             return proxyForComparison
         }
     }
+    
     
     
     

@@ -8,16 +8,17 @@
 
 import UIKit
 
+let BookDidChangeNotification = "Selected book did change"
+let BookKey = "Key"
 
 
 class LibraryViewController: UITableViewController {
 
-    //MARK - Properties
+    //MARK: - Properties
     let model : Library
     
-    //MARK - Delegate
     
-    //MARK - Initialization
+    //MARK: - Initialization
     init(model: Library){
         self.model = model
         super.init(nibName: nil, bundle: nil)
@@ -27,6 +28,36 @@ class LibraryViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: Tabke view delegate
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var book : Book?
+        
+        if model.favorites.count > 0 {  // Hay favoritos
+            if indexPath.section == 0 { // Nos pide libro de favoritos
+                //delegate?.libraryViewController(self,
+                //                                didSelectBook: model.bookAtIndex(indexPath.row, tag: "Favorites")!)
+                book = model.bookAtIndex(indexPath.row, tag: "Favorites")
+            }else{
+                //delegate?.libraryViewController(self,
+                //                                didSelectBook: model.bookAtIndex(indexPath.row,
+                //                                    tag: model.tags!.tagToOrderArray()[indexPath.section-1])!)
+                book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+            }
+        }else{
+            //delegate?.libraryViewController(self,
+            //                                didSelectBook: model.bookAtIndex(indexPath.row,
+            //                                    tag: model.tags!.tagToOrderArray()[indexPath.section])!)
+            book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section])
+        }
+        
+        // Enviamos la notificacion
+        let nc = NSNotificationCenter.defaultCenter()
+        let notif = NSNotification(name: BookDidChangeNotification,
+                                   object: self, userInfo: [BookKey:book!])
+        nc.postNotification(notif)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,3 +192,5 @@ class LibraryViewController: UITableViewController {
     */
 
 }
+
+

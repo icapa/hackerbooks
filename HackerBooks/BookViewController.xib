@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookViewController" customModule="HackerBooks" customModuleProvider="target">
             <connections>
                 <outlet property="authorsView" destination="1rC-Na-61Y" id="jAW-eX-ceb"/>
+                <outlet property="favButton" destination="WQH-q3-LVW" id="NcO-yH-3WR"/>
                 <outlet property="imageView" destination="6LT-tt-Pke" id="FS7-NA-efg"/>
                 <outlet property="titleView" destination="2WX-0K-cFa" id="A33-n4-bVF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -19,50 +20,51 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6LT-tt-Pke">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="346"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="27" y="89" width="267" height="297"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Esto es una prueba de cómo sería el título, Git por ejemplo" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" adjustsFontSizeToFit="NO" id="2WX-0K-cFa">
-                    <rect key="frame" x="0.0" y="344" width="320" height="93"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Esto es una prueba de cómo sería el título, Git por ejemplo" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" adjustsFontSizeToFit="NO" id="2WX-0K-cFa">
+                    <rect key="frame" x="0.0" y="394" width="320" height="93"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="21"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authors:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ihb-uC-EPB">
-                    <rect key="frame" x="0.0" y="459" width="63" height="21"/>
+                    <rect key="frame" x="0.0" y="499" width="63" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" id="1rC-Na-61Y">
-                    <rect key="frame" x="66" y="455" width="254" height="29"/>
+                    <rect key="frame" x="66" y="495" width="254" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZrP-Pa-ZSQ">
-                    <rect key="frame" x="0.0" y="538" width="98" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Read Book"/>
-                    <connections>
-                        <action selector="readBook:" destination="-1" eventType="touchUpInside" id="SSo-G0-DqH"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WQH-q3-LVW">
                     <rect key="frame" x="241" y="538" width="79" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Favorite"/>
                     <connections>
                         <action selector="markFavorite:" destination="-1" eventType="touchUpInside" id="HY6-99-t5Y"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZrP-Pa-ZSQ">
+                    <rect key="frame" x="0.0" y="538" width="98" height="30"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Read Book"/>
+                    <connections>
+                        <action selector="readBook:" destination="-1" eventType="touchUpInside" id="SSo-G0-DqH"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="280" y="355"/>
         </view>
-        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Vid-RG-Lyk"/>
     </objects>
 </document>

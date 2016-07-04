@@ -33,7 +33,13 @@ class BookViewController: UIViewController {
         
         // Los autores
         self.authorsView.text = model.authors.description
-        //TODO: Esto lo tengo que dejar más bonito
+        
+        // Favorito
+        if model.isFavorite == true {
+            favButton.setTitle("No Fav", forState: UIControlState.Normal)
+        }else{
+            favButton.setTitle("Favorite", forState: UIControlState.Normal)
+        }
         
     }
     
@@ -41,15 +47,29 @@ class BookViewController: UIViewController {
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var favButton: UIButton!
     
     @IBOutlet weak var authorsView: UILabel!
     
+    //MARK: IB Actions Fav & Read
     
     @IBAction func markFavorite(sender: AnyObject) {
+        if favButton.currentTitle == "Favorite"{
+            model.setFavorite(true)
+            favButton.setTitle("No Fav", forState: UIControlState.Normal)
+        }else{
+            model.setFavorite(false)
+            favButton.setTitle("Favorite", forState: UIControlState.Normal)
+            
+        }
+        
     }
     
     @IBAction func readBook(sender: AnyObject) {
+        let pdfReader = ReaderViewController(model: model)
+        navigationController?.pushViewController(pdfReader, animated: true)
     }
+    
     
     
     
@@ -65,9 +85,34 @@ class BookViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(bookDidChange), name: BookDidChangeNotification, object: nil)
         self.syncModelWithView()
     }
+    /*
+    override func viewDidUnload() {
+        self.viewDidUnload()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(self)
 
+    }
+    */
+
+    /*
+    override func viewDidUnload() {
+        super.viewDidUnLoad()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(self)
+        
+    }*/
+    
+ 
     /*
     // MARK: - Navigation
 
@@ -77,5 +122,12 @@ class BookViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    //MARK: Notification
+    func bookDidChange(notification: NSNotification){
+        // La info de la notificacion
+        let info = notification.userInfo
+        let book = info![BookKey] as? Book
+        model = book!
+        syncModelWithView()
+    }
 }
