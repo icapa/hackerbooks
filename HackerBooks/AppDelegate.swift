@@ -28,22 +28,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Data couldn't be loaded")
         }
         
+        // Modelo de la libraria
         let theLibrary = Library()
-        /* Prueba de libreria y carga remota */
-        let libro = theLibrary.bookAtIndex(0, tag: "git")
-        let pdf = libro?.pdfFile
-        let img = libro?.imgFile
         
-        // Ahora compruebo que si accedo no vuelve a cargarlo
-        let pdf2 = libro?.pdfFile
-        let img2 = libro?.imgFile
+        // Creamos el controlador de la libreria
+        let libraryVc = LibraryViewController(model: theLibrary)
         
-        if (pdf == pdf2){
-            print("Bien pdf")
-        }
-        if (img == img2){
-            print("Bien img")
-        }
+        // Metemos en un nav
+        let uNav = UINavigationController(rootViewController: libraryVc)
+        
+        // Creamos el characterViewControler
+        // TODO
+        
+        // Lo metemos en otro navigation
+        // TODO
+        
+        // Creamos un splitView y le endosamos los dos navs
+        let splitVc = UISplitViewController()
+        splitVc.viewControllers = [uNav]
+        
+        // Crear la ventana
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        // Asignamos nav como root View Controller
+        window?.rootViewController = splitVc
+        
+        // Asignamos delegados...
+        // TODO
+        
+        // Mostramos la ventana
+        window?.makeKeyAndVisible()
+        
+        //-- Tema de la ventanas
         
         
         

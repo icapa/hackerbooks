@@ -56,32 +56,24 @@ class Library {
                     
                     // Meto en cada dictionario por tags
                     for t in book.tags.tagToOrderArray(){
-                        if dict[t] != nil{ // Si existe el diccionario inserto
-                            dict[t]?.insert(book)
-                        }else{
-                            // Si no tengo que crearlo, y lo añado
+                        if dict[t] == nil{ // Si existe el diccionario inserto
                             dict[t] = BookArray()
-                            // Fuerzo pq le acabo de crear
-                            dict[t]?.insert(book)
                         }
+                        dict[t]?.insert(book)
                         
                     }
                     
                     // Meto en el dictionario si es favorito
                     if book.isFavorite == true{
-                        if dict["Favorite"] != nil {
-                            dict["Favorite"]?.insert(book)
-                        }else{
+                        if dict["Favorite"] == nil {
                             dict["Favorite"] = BookArray()
-                            dict["Favorite"]?.insert(book)
                         }
+                        dict["Favorite"]?.insert(book)
                     }
         
                     // Guardo los tags para posterior uso
                     tags?.addTags(tags: book.tags.tagToOrderArray())
-                    let desc = tags?.description
-                    print("\(desc)")
- 
+                    
                 
                 }catch{
                     print ("Failed json element \(jsonBook)")
@@ -93,8 +85,6 @@ class Library {
         }catch{
             
         }
-        
-        self.debugDictionary()
     }
     //MARK: - Table requirements
     // Libros para un tag

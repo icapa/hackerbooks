@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CF0D126F1D25B41800B4A458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D126E1D25B41800B4A458 /* AppDelegate.swift */; };
 		CF0D12761D25B41800B4A458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF0D12751D25B41800B4A458 /* Assets.xcassets */; };
+		CF15B6D61D2AE93F00ADAF7C /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B6D51D2AE93F00ADAF7C /* LibraryViewController.swift */; };
 		CF4FEFA71D2804A000E68269 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA61D2804A000E68269 /* Book.swift */; };
 		CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA81D280BA600E68269 /* Tags.swift */; };
 		CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */; };
@@ -24,6 +25,7 @@
 		CF0D126E1D25B41800B4A458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF0D12751D25B41800B4A458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF0D127A1D25B41800B4A458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF15B6D51D2AE93F00ADAF7C /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		CF4FEFA61D2804A000E68269 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CF4FEFA81D280BA600E68269 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		CFFF37C01D26D106004E00AD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CF15B6D51D2AE93F00ADAF7C /* LibraryViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				CF4FEFA71D2804A000E68269 /* Book.swift in Sources */,
 				CF4FEFAD1D28877700E68269 /* Library.swift in Sources */,
 				CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */,
+				CF15B6D61D2AE93F00ADAF7C /* LibraryViewController.swift in Sources */,
 				CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
