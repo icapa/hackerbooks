@@ -29,8 +29,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let theLibrary = Library()
+        /* Prueba de libreria y carga remota */
+        let libro = theLibrary.bookAtIndex(0, tag: "git")
+        let pdf = libro?.pdfFile
+        let img = libro?.imgFile
         
-        theLibrary.bookCountForTag("programming")
+        // Ahora compruebo que si accedo no vuelve a cargarlo
+        let pdf2 = libro?.pdfFile
+        let img2 = libro?.imgFile
+        
+        if (pdf == pdf2){
+            print("Bien pdf")
+        }
+        if (img == img2){
+            print("Bien img")
+        }
+        
         
         
         

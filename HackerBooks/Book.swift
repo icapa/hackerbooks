@@ -9,21 +9,60 @@
 import Foundation
 import UIKit
 
-class Book : Comparable{
+class Book : Comparable, Hashable{
     
     //MARK: - Stored properties
     // Los primeros son oblitatorios
     let title       : String
     let authors     :[String]
     let tags        : Tags
-    let image       : UIImage?
-    let pdf         : NSData?
-    // El favorito de momento lo marco a falso
+    let image       : NSURL
+    let pdf         : NSURL
     var isFavorite    : Bool? = false
+    //MARK: - Private Image,Pdf
+    private var dataImg: UIImage?
+    private var dataPdf : NSData?
+    
+    
+    
+    
+    //MARK: - Resource loading
+    var imgFile: UIImage?{
+        get{
+            if self.dataImg==nil{
+                do{
+                    let imgData = try loadResource(withUrl: self.image)
+                    let ui = UIImage(data: imgData)
+                    self.dataImg=ui
+                    return ui
+                }catch{
+                    return nil
+                }
+            }else{
+                return self.dataImg
+            }
+        }
+    }
+    var pdfFile: NSData?{
+        get{
+            if self.dataPdf==nil{
+                do{
+                    let pdfData = try loadResource(withUrl: self.pdf)
+                    self.dataPdf = pdfData
+                    return pdfData
+                    
+                }catch{
+                    return nil
+                }
+            }else{
+                return self.dataPdf
+            }
+        }
+    }
     
     //MARK: - Inicializadores
     init(title : String, authors: [String],
-         tags: Tags, image: UIImage?, pdf: NSData?){
+         tags: Tags, image: NSURL, pdf: NSURL){
         self.title=title
         self.authors=authors
         self.tags=tags
@@ -32,7 +71,7 @@ class Book : Comparable{
     }
     
     convenience init(title : String, authors: [String],
-                     tags: Tags, image: UIImage, pdf: NSData,
+                     tags: Tags, image: NSURL, pdf: NSURL,
                      favorite: Bool){
         
         self.init(title: title,
@@ -67,3 +106,12 @@ func  < (lhs: Book, rhs: Book) -> Bool{
     return lhs.proxyForSorting < rhs.proxyForSorting
 }
 
+//MARK: - Protocol Hashable
+extension Book{
+    var hashValue: Int {
+        get{
+            return "\(self.title)\(self.authors)".hash  // Devuelvo el hash del titulo y autores
+        }
+    }
+    
+}

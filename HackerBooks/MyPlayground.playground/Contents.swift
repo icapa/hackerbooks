@@ -107,6 +107,25 @@ print (arraySet)
 
 var arrayString = arraySet as NSArray
 
+// Prueba de los getter
+
+class prueba{
+    var t: Int?{
+        get{
+            if self.t==nil{
+            
+                return 0
+            }
+            else{
+                return self.t
+                
+            }
+        }
+    }
+}
+
+
+
 
 
 

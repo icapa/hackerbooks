@@ -45,35 +45,17 @@ func decode (book json: JSONDictionary) throws -> Book{
     
     
     // Convertimos primero los tags, tenemos una clase para ello
-    // Quito los espacios al final y principio
-    
     let arrayTags = theTags.characters.split(",").map(String.init)
     var extraArray = [String]()
     for t in arrayTags{
+        // Quito los espacios al final y principio
         extraArray.append(t.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
     }
     
     let tag = Tags(withTags: extraArray)
     
-    // Descargamos o leemos la imagen
     
-    // Descargamos o leemos el pdf
-    var theImage : UIImage?
-    do{
-        let imageData = try loadResource(withUrl: imageUrl)
-        theImage = UIImage(data: imageData)!
-        
-    }catch{
-        theImage=nil
-    }
-    var pdfData : NSData?
-    do{
-        pdfData = try loadResource(withUrl: pdfUrl)
-    }catch{
-        pdfData=nil
-    }
-    
-    return Book(title: theTitle, authors: authorsList, tags: tag, image: theImage, pdf: pdfData)
+    return Book(title: theTitle, authors: authorsList, tags: tag, image: imageUrl, pdf: pdfUrl)
     
     
 

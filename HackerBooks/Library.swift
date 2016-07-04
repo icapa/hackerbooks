@@ -9,7 +9,7 @@
 import Foundation
 class Library {
     //MARK: Utility types
-    typealias BookArray =   [Book]
+    typealias BookArray =   Set<Book>
     typealias BookDictionary = [String: BookArray]
     
     
@@ -17,16 +17,13 @@ class Library {
     var dict: BookDictionary = BookDictionary()
     
     //MARK: Stored properties
-    var books   : BookArray?            // Los libros
     var tags    : Tags?             // Lista de los tags
     var favorites = Set<String>()
+    var allBooks = [Book]()
     
     var booksCount : Int{
         get{
-            guard let b = books else{
-                return 0;
-            }
-            return b.count
+            return allBooks.count
         }
     }
     
@@ -42,9 +39,6 @@ class Library {
     //MARK: - Initializacion
     init(){
         tags = Tags()
-        
-        books = BookArray()
-        
         do{
             let json = try loadJSONFromLocalFile()
             self.favorites = loadFavoritesFile()
@@ -54,32 +48,32 @@ class Library {
                     // Miro si tengo que meterlo en favoritos
                     book.isFavorite = self.favorites.contains(book.title)
                     
-                    books?.append(book)
+                    self.allBooks.append(book)
+                
+                
+                    
                     
                     
                     // Meto en cada dictionario por tags
                     for t in book.tags.tagToOrderArray(){
-                        if var d = dict[t]{ // Si existe el diccionario inserto
-                            d.append(book)
-                            dict[t]=d
+                        if dict[t] != nil{ // Si existe el diccionario inserto
+                            dict[t]?.insert(book)
                         }else{
                             // Si no tengo que crearlo, y lo añado
                             dict[t] = BookArray()
                             // Fuerzo pq le acabo de crear
-                            dict[t]!.append(book)
+                            dict[t]?.insert(book)
                         }
                         
                     }
                     
                     // Meto en el dictionario si es favorito
                     if book.isFavorite == true{
-                        if var f = dict["Favorite"] {
-                            f.append(book)
-                            dict["Favorite"]=f
+                        if dict["Favorite"] != nil {
+                            dict["Favorite"]?.insert(book)
                         }else{
                             dict["Favorite"] = BookArray()
-                            dict["Favorite"]!.append(book)
-                        
+                            dict["Favorite"]?.insert(book)
                         }
                     }
         
@@ -99,6 +93,8 @@ class Library {
         }catch{
             
         }
+        
+        self.debugDictionary()
     }
     //MARK: - Table requirements
     // Libros para un tag
@@ -127,7 +123,9 @@ class Library {
         guard let bookDict = dict[t] else{
             return nil
         }
-        return bookDict[index]
+        
+        return bookDict[bookDict.startIndex.advancedBy(index)]
+        
     }
 
     
@@ -146,4 +144,5 @@ extension Library {
             }
         }
     }
+    
 }
