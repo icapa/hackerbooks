@@ -46,11 +46,27 @@ class LibraryViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return model.tagsCount
+        if model.favorites.count>0{
+            return model.tagsCount+1
+        }
+        else{
+            return model.tagsCount
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.bookCountForTag(model.tags!.tagToOrderArray()[section])
+        if model.favorites.count>0 {
+            if section == 0{
+                return model.bookCountForTag("Favorites")
+            } else{
+                return model.bookCountForTag(model.tags!.tagToOrderArray()[section-1])
+            }
+        }
+        else{
+            return model.bookCountForTag(model.tags!.tagToOrderArray()[section])
+        }
+            
+        
     }
 
     
@@ -58,8 +74,19 @@ class LibraryViewController: UITableViewController {
         
         // Tipo de celda
         let cellId = "BookCell"
+        var book : Book?
+        if model.favorites.count>0 {
+            if indexPath.section == 0{
+                book = model.bookAtIndex(indexPath.row, tag: "Favorites")
+            }else{
+                book = model.bookAtIndex(indexPath.row,
+                                         tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+            }
+        }else{
+            book = model.bookAtIndex(indexPath.row,
+                                     tag: model.tags!.tagToOrderArray()[indexPath.section])
+        }
         
-        let book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section])
         
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if (cell==nil){
@@ -75,7 +102,17 @@ class LibraryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.tags!.tagToOrderArray()[section]
+        // Si hay favoritos la seccion 0 es la de favoritos
+        if model.favorites.count>0 {
+            if section == 0 {
+                return "Favorites"
+            }else{
+                return model.tags!.tagToOrderArray()[section-1]
+            }
+        }
+        else{
+            return model.tags!.tagToOrderArray()[section]
+        }
     }
     
     /*

@@ -30,22 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Modelo de la libraria
         let theLibrary = Library()
+        let theBook = theLibrary.allBooks[0]    // Para pintar uno
         
         // Creamos el controlador de la libreria
         let libraryVc = LibraryViewController(model: theLibrary)
-        
         // Metemos en un nav
         let uNav = UINavigationController(rootViewController: libraryVc)
         
-        // Creamos el characterViewControler
-        // TODO
+        // Creamos un book para que abra
+        let bookVc = BookViewController(model: theBook)
         
-        // Lo metemos en otro navigation
-        // TODO
+        // Creamos el characterViewControler
+        let bookNav = UINavigationController(rootViewController: bookVc)
+        
+        
+       
         
         // Creamos un splitView y le endosamos los dos navs
         let splitVc = UISplitViewController()
-        splitVc.viewControllers = [uNav]
+        splitVc.viewControllers = [uNav,bookNav]
         
         // Crear la ventana
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
