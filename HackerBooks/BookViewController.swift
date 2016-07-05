@@ -19,8 +19,9 @@ class BookViewController: UIViewController {
     init(model: Book){
         self.model=model
         super.init(nibName: "BookViewController", bundle: nil)
-    
     }
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -18,6 +18,8 @@
 		CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA81D280BA600E68269 /* Tags.swift */; };
 		CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */; };
 		CF4FEFAD1D28877700E68269 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAC1D28877700E68269 /* Library.swift */; };
+		CFF1AA221D2C50B800DD12BA /* BookCellViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1AA201D2C50B800DD12BA /* BookCellViewTableViewCell.swift */; };
+		CFF1AA231D2C50B800DD12BA /* BookCellViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFF1AA211D2C50B800DD12BA /* BookCellViewTableViewCell.xib */; };
 		CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */; };
 		CFFF37C51D26D3CB004E00AD /* ErrorHackerBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */; };
 		CFFF37D21D271FC8004E00AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFFF37D01D271FC8004E00AD /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 		CF4FEFA81D280BA600E68269 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 		CF4FEFAC1D28877700E68269 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		CFF1AA201D2C50B800DD12BA /* BookCellViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCellViewTableViewCell.swift; sourceTree = "<group>"; };
+		CFF1AA211D2C50B800DD12BA /* BookCellViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookCellViewTableViewCell.xib; sourceTree = "<group>"; };
 		CFFF37C21D26D16C004E00AD /* ResourceFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceFileManager.swift; sourceTree = "<group>"; };
 		CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHackerBooks.swift; sourceTree = "<group>"; };
 		CFFF37CA1D271A26004E00AD /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
@@ -81,8 +85,8 @@
 		CF0D126D1D25B41800B4A458 /* HackerBooks */ = {
 			isa = PBXGroup;
 			children = (
+				CFF1AA1F1D2C507600DD12BA /* Views */,
 				CF0BB3DA1D2C47AD008D28A2 /* Resources */,
-				CFFF37C91D26D7B0004E00AD /* Framework */,
 				CFFF37C11D26D10C004E00AD /* Misc */,
 				CFFF37C01D26D106004E00AD /* Controllers */,
 				CFFF37BF1D26D100004E00AD /* Models */,
@@ -92,6 +96,15 @@
 				CFFF37CA1D271A26004E00AD /* MyPlayground.playground */,
 			);
 			path = HackerBooks;
+			sourceTree = "<group>";
+		};
+		CFF1AA1F1D2C507600DD12BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFF1AA201D2C50B800DD12BA /* BookCellViewTableViewCell.swift */,
+				CFF1AA211D2C50B800DD12BA /* BookCellViewTableViewCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		CFFF37BF1D26D100004E00AD /* Models */ = {
@@ -124,13 +137,6 @@
 				CFFF37C41D26D3CB004E00AD /* ErrorHackerBooks.swift */,
 			);
 			name = Misc;
-			sourceTree = "<group>";
-		};
-		CFFF37C91D26D7B0004E00AD /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +200,7 @@
 				CF0D12761D25B41800B4A458 /* Assets.xcassets in Resources */,
 				CFFF37D21D271FC8004E00AD /* LaunchScreen.storyboard in Resources */,
 				CF15B6DA1D2AF60000ADAF7C /* BookViewController.xib in Resources */,
+				CFF1AA231D2C50B800DD12BA /* BookCellViewTableViewCell.xib in Resources */,
 				CF15B6DE1D2B147700ADAF7C /* ReaderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF0D126F1D25B41800B4A458 /* AppDelegate.swift in Sources */,
+				CFF1AA221D2C50B800DD12BA /* BookCellViewTableViewCell.swift in Sources */,
 				CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */,
 				CF15B6DD1D2B147700ADAF7C /* ReaderViewController.swift in Sources */,
 				CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */,

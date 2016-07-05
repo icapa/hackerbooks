@@ -22,6 +22,11 @@ class LibraryViewController: UITableViewController {
     init(model: Library){
         self.model = model
         super.init(nibName: nil, bundle: nil)
+        
+        // Celda personalizada
+        let cellNib = UINib(nibName: "BookCellViewTableViewCell", bundle: nil)
+        self.tableView.registerNib(cellNib, forCellReuseIdentifier: "CellBook")
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,21 +64,8 @@ class LibraryViewController: UITableViewController {
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -104,7 +96,7 @@ class LibraryViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Tipo de celda
-        let cellId = "BookCell"
+        //let cellId = "BookCell"
         var book : Book?
         if self.model.bookCountForTag("Favorites") > 0 {
             if indexPath.section == 0{
@@ -118,7 +110,8 @@ class LibraryViewController: UITableViewController {
                                      tag: model.tags!.tagToOrderArray()[indexPath.section])
         }
         
-        
+        /* Esto es con celda estándar */
+        /*
         var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
         if (cell==nil){
             // Opcional vacio se crea a pelo
@@ -128,6 +121,12 @@ class LibraryViewController: UITableViewController {
         cell?.imageView?.image = book?.imgFile
         cell?.textLabel?.text = book?.title
         cell?.detailTextLabel?.text = book?.authors.description
+        */
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("CellBook", forIndexPath: indexPath) as? BookCellViewTableViewCell
+        cell?.bookImg.image = book?.imgFile
+        cell?.bookName.text = book?.title
+        
         
         return cell!
     }
@@ -146,6 +145,10 @@ class LibraryViewController: UITableViewController {
         }
     }
     
+    //MARK: - Table Row Heigh
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath)->CGFloat{
+        return 80.0
+    }
     
     
 }

@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let bookNav = UINavigationController(rootViewController: bookVc)
         
         
-       
         
         // Creamos un splitView y le endosamos los dos navs
         let splitVc = UISplitViewController()

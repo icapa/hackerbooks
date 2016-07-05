@@ -26,7 +26,11 @@ class ReaderViewController: UIViewController {
     
     //MARK: Sync View & Model
     func syncModelWithView(){
-       pdfViewer.loadData(model.pdfFile!,
+        guard let pdf = model.pdfFile else{
+            pdfViewer.loadHTMLString("<H1> Error loading pdf </H1>", baseURL: NSURL())
+            return
+        }
+        pdfViewer.loadData(pdf,
                           MIMEType: "application/pdf",
                           textEncodingName: "UTF-8",
                           baseURL: NSURL())
