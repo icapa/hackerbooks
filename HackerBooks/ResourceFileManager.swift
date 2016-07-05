@@ -214,8 +214,9 @@ func saveFavoritesFile(withFile file: Set<String>){
     newUrl = url.URLByAppendingPathComponent(favoritesFile)
     let elArray : NSArray = listaStrings as NSArray
     elArray.writeToURL(newUrl, atomically: true)
-    
 }
+
+
 
 
 

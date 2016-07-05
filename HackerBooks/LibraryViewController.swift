@@ -33,7 +33,7 @@ class LibraryViewController: UITableViewController {
         
         var book : Book?
         
-        if model.favorites.count > 0 {  // Hay favoritos
+        if self.model.bookCountForTag("Favorites") > 0 {  // Hay favoritos
             if indexPath.section == 0 { // Nos pide libro de favoritos
                 //delegate?.libraryViewController(self,
                 //                                didSelectBook: model.bookAtIndex(indexPath.row, tag: "Favorites")!)
@@ -77,7 +77,7 @@ class LibraryViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if model.favorites.count>0{
+        if self.model.bookCountForTag("Favorites") > 0{
             return model.tagsCount+1
         }
         else{
@@ -86,7 +86,7 @@ class LibraryViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if model.favorites.count>0 {
+        if self.model.bookCountForTag("Favorites") > 0 {
             if section == 0{
                 return model.bookCountForTag("Favorites")
             } else{
@@ -106,7 +106,7 @@ class LibraryViewController: UITableViewController {
         // Tipo de celda
         let cellId = "BookCell"
         var book : Book?
-        if model.favorites.count>0 {
+        if self.model.bookCountForTag("Favorites") > 0 {
             if indexPath.section == 0{
                 book = model.bookAtIndex(indexPath.row, tag: "Favorites")
             }else{
@@ -134,7 +134,7 @@ class LibraryViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // Si hay favoritos la seccion 0 es la de favoritos
-        if model.favorites.count>0 {
+        if self.model.bookCountForTag("Favorites") > 0 {
             if section == 0 {
                 return "Favorites"
             }else{
@@ -146,51 +146,30 @@ class LibraryViewController: UITableViewController {
         }
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    
+}
+//MARK: - Extension Delegate
+extension LibraryViewController:  BookViewControlerDelegate{
+    func bookViewControler(vc: BookViewController, didSelectBook book: Book){
+        if book.isFavorite == true{
+            model.addBookInTag("Favorites", withBook: book)
+            model.favorites.insert(book.title)
+        }else{
+            model.remoteBookInTag("Favorites", withBook: book)
+            model.favorites.remove(book.title)
+        }
+        // Habría que guardar en fichero para la siguiente vez
+        
+        // El fichero guarda 
+        
+        saveFavoritesFile(withFile: model.favorites)
+    
+        
+        self.tableView.reloadData()
+        
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 

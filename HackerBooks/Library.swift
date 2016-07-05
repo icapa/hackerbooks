@@ -36,6 +36,8 @@ class Library {
         }
     }
     
+    
+    
     //MARK: - Initializacion
     init(){
         tags = Tags()
@@ -65,10 +67,10 @@ class Library {
                     
                     // Meto en el dictionario si es favorito
                     if book.isFavorite == true{
-                        if dict["Favorite"] == nil {
-                            dict["Favorite"] = BookArray()
+                        if dict["Favorites"] == nil {
+                            dict["Favorites"] = BookArray()
                         }
-                        dict["Favorite"]?.insert(book)
+                        dict["Favorites"]?.insert(book)
                     }
         
                     // Guardo los tags para posterior uso
@@ -114,10 +116,42 @@ class Library {
             return nil
         }
         
-        return bookDict[bookDict.startIndex.advancedBy(index)]
+        
+        // Array temporal para ordenar el set, es una cerdada pero bueno
+        var tempArray = bookLibraryToOrderArray(withLibrary: bookDict)
+        for a in bookDict{
+            if tempArray[index] == a.title {
+                return a
+            }
+        }
+        return nil
+        
+        
         
     }
+    //MARK: - Utils
+    func addBookInTag(tag :String, withBook book: Book){
+        if dict[tag] == nil {
+            dict[tag] = BookArray()
+        }
+        dict[tag]?.insert(book)
+    }
+    func remoteBookInTag(tag : String, withBook book: Book){
+        if dict[tag] == nil{
+            return
+        }
+        dict[tag]?.remove(book)
+    }
+    func bookLibraryToOrderArray(withLibrary lib: Set<Book>)->[String]{
+        var auxArray = [String]()
+        for i in lib{
+            auxArray.append(i.title)
+        }
+        auxArray.sortInPlace()
+        return auxArray
+    }
 
+   
     
 }
 //MARK: - Extensions

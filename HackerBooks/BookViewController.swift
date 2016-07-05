@@ -13,6 +13,8 @@ class BookViewController: UIViewController {
     //MARK: - Properties
     var model: Book
     
+    var delegate: BookViewControlerDelegate?
+    
     //MARK: - Initialization
     init(model: Book){
         self.model=model
@@ -32,17 +34,24 @@ class BookViewController: UIViewController {
         self.titleView.text = model.title
         
         // Los autores
-        self.authorsView.text = model.authors.description
+        self.authorsView.text = "Authors: \(model.authors.description)"
+        
+        // Los tags
+        self.tagsView.text = "Tags: \(model.tags.tagToOrderArray().description)"
         
         // Favorito
         if model.isFavorite == true {
             favButton.setTitle("No Fav", forState: UIControlState.Normal)
+            favButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+
         }else{
             favButton.setTitle("Favorite", forState: UIControlState.Normal)
+            favButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
         
     }
     
+    @IBOutlet weak var tagsView: UILabel!
     
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -57,11 +66,16 @@ class BookViewController: UIViewController {
         if favButton.currentTitle == "Favorite"{
             model.setFavorite(true)
             favButton.setTitle("No Fav", forState: UIControlState.Normal)
+            
         }else{
             model.setFavorite(false)
             favButton.setTitle("Favorite", forState: UIControlState.Normal)
             
         }
+        syncModelWithView()
+        // Mando al delegado el libro que quiero meter o quitar
+        delegate?.bookViewControler(self, didSelectBook: model)
+        
         
     }
     
@@ -130,4 +144,8 @@ class BookViewController: UIViewController {
         model = book!
         syncModelWithView()
     }
+}
+//MARK: - Delegate
+protocol BookViewControlerDelegate{
+    func bookViewControler(vc: BookViewController, didSelectBook book: Book)
 }
