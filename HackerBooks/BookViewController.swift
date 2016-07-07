@@ -102,6 +102,7 @@ class BookViewController: UIViewController {
         super.viewWillAppear(animated)
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(bookDidChange), name: BookDidChangeNotification, object: nil)
+        edgesForExtendedLayout = .None
         self.syncModelWithView()
     }
     /*

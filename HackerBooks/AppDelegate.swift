@@ -28,14 +28,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Data couldn't be loaded")
         }
         
-        // Modelo de la libraria
+        // Modelos de la libraria
         let theLibrary = Library()
         let theBook = theLibrary.allBooks[0]    // Para pintar uno
         
         // Creamos el controlador de la libreria
         let libraryVc = LibraryViewController(model: theLibrary)
+        
+        // Creamos el controlador de la tabla ordenada
+        let orderVc = SetOrderView(withTable: libraryVc)
+        let uNavOrder = UINavigationController(rootViewController: orderVc)
+        
         // Metemos en un nav
-        let uNav = UINavigationController(rootViewController: libraryVc)
+        // Esto es antes
+        //let uNav = UINavigationController(rootViewController: libraryVc)
+        
+       
+        
         
         // Creamos un book para que abra
         let bookVc = BookViewController(model: theBook)
@@ -45,9 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
+        
         // Creamos un splitView y le endosamos los dos navs
         let splitVc = UISplitViewController()
-        splitVc.viewControllers = [uNav,bookNav]
+        splitVc.viewControllers = [uNavOrder,bookNav]
         
         // Crear la ventana
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -56,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = splitVc
         
         // Asignamos delegados...
+        //bookVc.delegate = libraryVc
         bookVc.delegate = libraryVc
         
         // Mostramos la ventana

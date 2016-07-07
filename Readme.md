@@ -38,6 +38,6 @@ Para actualizar el PDF, cuando el usuario cambia de celda seleccionada el contro
 
 Estos son algunos de los extras que he añadido:
 
-* La carga del PDF se hace en backgound por GCD así veo el activity mientras carga.
+* La carga de los PDF se hace en backgound por GCD así veo el activity en el visor mientras carga.
 * 
 

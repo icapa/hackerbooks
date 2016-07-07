@@ -14,6 +14,8 @@
 		CF15B6DA1D2AF60000ADAF7C /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF15B6D81D2AF60000ADAF7C /* BookViewController.xib */; };
 		CF15B6DD1D2B147700ADAF7C /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B6DB1D2B147700ADAF7C /* ReaderViewController.swift */; };
 		CF15B6DE1D2B147700ADAF7C /* ReaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF15B6DC1D2B147700ADAF7C /* ReaderViewController.xib */; };
+		CF2D8E451D2DD37A00BBEF49 /* SetOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2D8E431D2DD37A00BBEF49 /* SetOrderView.swift */; };
+		CF2D8E461D2DD37A00BBEF49 /* SetOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2D8E441D2DD37A00BBEF49 /* SetOrderView.xib */; };
 		CF4FEFA71D2804A000E68269 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA61D2804A000E68269 /* Book.swift */; };
 		CF4FEFA91D280BA600E68269 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFA81D280BA600E68269 /* Tags.swift */; };
 		CF4FEFAB1D281ECA00E68269 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */; };
@@ -35,6 +37,8 @@
 		CF15B6D81D2AF60000ADAF7C /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
 		CF15B6DB1D2B147700ADAF7C /* ReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
 		CF15B6DC1D2B147700ADAF7C /* ReaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController.xib; sourceTree = "<group>"; };
+		CF2D8E431D2DD37A00BBEF49 /* SetOrderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetOrderView.swift; sourceTree = "<group>"; };
+		CF2D8E441D2DD37A00BBEF49 /* SetOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetOrderView.xib; sourceTree = "<group>"; };
 		CF4FEFA61D2804A000E68269 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		CF4FEFA81D280BA600E68269 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		CF4FEFAA1D281ECA00E68269 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				CF15B6D81D2AF60000ADAF7C /* BookViewController.xib */,
 				CF15B6DB1D2B147700ADAF7C /* ReaderViewController.swift */,
 				CF15B6DC1D2B147700ADAF7C /* ReaderViewController.xib */,
+				CF2D8E431D2DD37A00BBEF49 /* SetOrderView.swift */,
+				CF2D8E441D2DD37A00BBEF49 /* SetOrderView.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 				CFFF37D21D271FC8004E00AD /* LaunchScreen.storyboard in Resources */,
 				CF15B6DA1D2AF60000ADAF7C /* BookViewController.xib in Resources */,
 				CFF1AA231D2C50B800DD12BA /* BookCellViewTableViewCell.xib in Resources */,
+				CF2D8E461D2DD37A00BBEF49 /* SetOrderView.xib in Resources */,
 				CF15B6DE1D2B147700ADAF7C /* ReaderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2D8E451D2DD37A00BBEF49 /* SetOrderView.swift in Sources */,
 				CF0D126F1D25B41800B4A458 /* AppDelegate.swift in Sources */,
 				CFF1AA221D2C50B800DD12BA /* BookCellViewTableViewCell.swift in Sources */,
 				CFFF37C31D26D16C004E00AD /* ResourceFileManager.swift in Sources */,
