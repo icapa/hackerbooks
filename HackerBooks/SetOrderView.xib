@@ -24,6 +24,9 @@
                         <segment title="First"/>
                         <segment title="Second"/>
                     </segments>
+                    <connections>
+                        <action selector="selectOrderChange:" destination="-1" eventType="valueChanged" id="KSz-F5-s75"/>
+                    </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="C61-KQ-aB1">
                     <rect key="frame" x="0.0" y="31" width="320" height="537"/>

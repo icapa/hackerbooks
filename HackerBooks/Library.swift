@@ -15,15 +15,17 @@ class Library {
     
     // Dictionario completo
     var dict: BookDictionary = BookDictionary()
-    
+
+    var completeDict : BookDictionary = BookDictionary()
+    // U
     //MARK: Stored properties
     var tags    : Tags?             // Lista de los tags
     var favorites = Set<String>()
-    var allBooks = [Book]()
+
     
     var booksCount : Int{
         get{
-            return allBooks.count
+            return completeDict.count
         }
     }
     
@@ -50,7 +52,11 @@ class Library {
                     // Miro si tengo que meterlo en favoritos
                     book.isFavorite = self.favorites.contains(book.title)
                     
-                    self.allBooks.append(book)
+                    if completeDict["all"] == nil{
+                        completeDict["all"] = BookArray()
+                    }
+                    self.completeDict["all"]?.insert(book)
+                    
                 
                 
                     
@@ -125,10 +131,19 @@ class Library {
             }
         }
         return nil
-        
-        
+    }
+    func bookAtIndexGlobal(index: Int) -> Book?{
+        var tempArray = bookLibraryToOrderArray(withLibrary: self.completeDict["all"]!)
+        for a in self.completeDict["all"]!{
+            if tempArray[index] == a.title {
+                return a
+            }
+        }
+        return nil
+
         
     }
+    
     //MARK: - Utils
     func addBookInTag(tag :String, withBook book: Book){
         if dict[tag] == nil {

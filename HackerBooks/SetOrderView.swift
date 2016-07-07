@@ -9,12 +9,23 @@
 import UIKit
 
 class SetOrderView: UIViewController {
+    
     @IBOutlet weak var selectOrder: UISegmentedControl!
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func selectOrderChange(sender: AnyObject) {
+        
+        self.theTable.sortModel = LibraryViewController.SortingModes(rawValue: sender.selectedSegmentIndex)!
+        self.theTable.tableView.reloadData()
+        self.tableView.reloadData()
+        
+    }
     
+    //MARK: - Properties
     let theTable : LibraryViewController
+    
+    //MARK: - Initializations
     
     init(withTable table: LibraryViewController){
         self.theTable = table
@@ -26,13 +37,26 @@ class SetOrderView: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.selectOrder.setTitle("Tag sort", forSegmentAtIndex: 0)
+        self.selectOrder.setTitle("Book sort", forSegmentAtIndex: 1)
+        
+        // El delegado para los datos la propia clase
         self.tableView.dataSource = self
+        // El delegado para seleccionar elementos, etc...
+        self.tableView.delegate = self
+        
         let cellNib = UINib(nibName: "BookCellViewTableViewCell", bundle: nil)
         self.tableView.registerNib(cellNib, forCellReuseIdentifier: "CellBook")
+        
+        tableView.rowHeight = self.theTable.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(index: 0))
+        
+        // Le digo a la tabla original que soy su delegado para actualizar rápido los fav
+        self.theTable.delegate = self
+        
 
     }
 
@@ -44,21 +68,9 @@ class SetOrderView: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
-extension SetOrderView: UITableViewDataSource, UITableViewDelegate{
+//MARK: - Extension TableDataSource
+extension SetOrderView: UITableViewDataSource, UITableViewDelegate {
    
     // MARK: - Table view data source
     
@@ -69,11 +81,6 @@ extension SetOrderView: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return theTable.tableView(tableView, numberOfRowsInSection: section)
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        theTable.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return theTable.tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
@@ -87,12 +94,19 @@ extension SetOrderView: UITableViewDataSource, UITableViewDelegate{
         
     }
     
-    // MARK - Heigh
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath)->CGFloat{
-        return self.theTable.tableView(tableView, heightForRowAtIndexPath: indexPath)
-    }
-    //MARK: - Table presentation
-   
-    
     
   }
+//MARK: - Delegates
+extension SetOrderView{
+    // Table View
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        theTable.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    }
+}
+
+extension SetOrderView: LibraryViewControllerDelegate{
+    func libraryViewController(vc: LibraryViewController, needReload reload: Bool) {
+        self.tableView.reloadData()
+    }
+}
+

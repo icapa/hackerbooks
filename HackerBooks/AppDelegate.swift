@@ -30,7 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Modelos de la libraria
         let theLibrary = Library()
-        let theBook = theLibrary.allBooks[0]    // Para pintar uno
+        let theBook = theLibrary.bookAtIndexGlobal(0)
+    
+        
         
         // Creamos el controlador de la libreria
         let libraryVc = LibraryViewController(model: theLibrary)
@@ -47,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Creamos un book para que abra
-        let bookVc = BookViewController(model: theBook)
+        let bookVc = BookViewController(model: theBook!)
         
         // Creamos el characterViewControler
         let bookNav = UINavigationController(rootViewController: bookVc)

@@ -16,56 +16,25 @@ class LibraryViewController: UITableViewController {
 
     //MARK: - Properties
     let model : Library
+    var sortModel : SortingModes
     
-    var setOrder : UISegmentedControl
+    //MARK: - Genero un delegado para avisar a la tabla de la vista ordenada
+    var delegate: LibraryViewControllerDelegate?
+    
     
     //MARK: - Initialization
     init(model: Library){
         self.model = model
-        setOrder = UISegmentedControl(items: ["Tags","Books"])
-        
+        self.sortModel = .tags
         super.init(nibName: nil, bundle: nil)
         // Celda personalizada
         let cellNib = UINib(nibName: "BookCellViewTableViewCell", bundle: nil)
         self.tableView.registerNib(cellNib, forCellReuseIdentifier: "CellBook")
-        
-        // Esto aparece pero hace scroll
-        //self.tableView.tableHeaderView = setOrder
-        
-        
-        
-       
-        setOrder.selectedSegmentIndex = 0
-        
-       
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    /*
-    func addHeaderView(){
-        let yPos = (self.navigationController?.navigationBar.frame.origin.y)! +
-            (self.navigationController?.navigationBar.frame.size.height)!
-        
-        let mainHeaderView = UIView()
-        mainHeaderView.addSubview(setOrder)
-        mainHeaderView.frame = CGRectMake(0, yPos, self.view.frame.size.width, 44.0)
-        //mainHeaderView.backgroundColor = UIColor.redColor()
-        self.tableView.superview?.addSubview(mainHeaderView)
-        //self.tableView.superview?.addSubview(setOrder)
-        self.tableView.contentInset=UIEdgeInsetsMake(yPos+44.0,
-                                                     self.tableView.contentInset.left, self.tableView.contentInset.bottom, self.tableView.contentInset.right)
-        
- 
-    }
-    */
-    /*
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        addHeaderView()
-    }
-    */
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -87,20 +56,25 @@ class LibraryViewController: UITableViewController {
         
         if self.model.bookCountForTag("Favorites") > 0 {  // Hay favoritos
             if indexPath.section == 0 { // Nos pide libro de favoritos
-                //delegate?.libraryViewController(self,
-                //                                didSelectBook: model.bookAtIndex(indexPath.row, tag: "Favorites")!)
                 book = model.bookAtIndex(indexPath.row, tag: "Favorites")
             }else{
-                //delegate?.libraryViewController(self,
-                //                                didSelectBook: model.bookAtIndex(indexPath.row,
-                //                                    tag: model.tags!.tagToOrderArray()[indexPath.section-1])!)
-                book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+                // Dependiendo del modelo
+                switch self.sortModel {
+                case .tags:
+                    book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+                case .books:
+                    book = model.bookAtIndexGlobal(indexPath.row)
+                }
+                
             }
         }else{
-            //delegate?.libraryViewController(self,
-            //                                didSelectBook: model.bookAtIndex(indexPath.row,
-            //                                    tag: model.tags!.tagToOrderArray()[indexPath.section])!)
-            book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section])
+            switch self.sortModel {
+            case .tags:
+                book = model.bookAtIndex(indexPath.row, tag: model.tags!.tagToOrderArray()[indexPath.section])
+            case .books:
+                book = model.bookAtIndexGlobal(indexPath.row)
+            }
+            
         }
         
         // Enviamos la notificacion
@@ -117,10 +91,21 @@ class LibraryViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.model.bookCountForTag("Favorites") > 0{
-            return model.tagsCount+1
+            switch self.sortModel {
+            case .tags:
+                return model.tagsCount+1
+            case .books:
+                return 2
+            }
+            
         }
         else{
-            return model.tagsCount
+            switch self.sortModel {
+            case .tags:
+                return model.tagsCount
+            case .books:
+                return 1
+            }
         }
     }
 
@@ -129,11 +114,22 @@ class LibraryViewController: UITableViewController {
             if section == 0{
                 return model.bookCountForTag("Favorites")
             } else{
-                return model.bookCountForTag(model.tags!.tagToOrderArray()[section-1])
+                switch self.sortModel {
+                case .tags:
+                    return model.bookCountForTag(model.tags!.tagToOrderArray()[section-1])
+                case .books:
+                    return model.completeDict["all"]!.count
+                }
             }
         }
         else{
-            return model.bookCountForTag(model.tags!.tagToOrderArray()[section])
+            switch self.sortModel {
+            case .tags:
+                return model.bookCountForTag(model.tags!.tagToOrderArray()[section])
+            case .books:
+                return model.completeDict["all"]!.count
+            }
+            
         }
             
         
@@ -142,33 +138,31 @@ class LibraryViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        // Tipo de celda
-        //let cellId = "BookCell"
         var book : Book?
         if self.model.bookCountForTag("Favorites") > 0 {
             if indexPath.section == 0{
                 book = model.bookAtIndex(indexPath.row, tag: "Favorites")
             }else{
-                book = model.bookAtIndex(indexPath.row,
-                                         tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+                switch self.sortModel {
+                case .tags:
+                    book = model.bookAtIndex(indexPath.row,
+                                             tag: model.tags!.tagToOrderArray()[indexPath.section-1])
+                case .books:
+                    book = model.bookAtIndexGlobal(indexPath.row)
+                }
+               
             }
         }else{
-            book = model.bookAtIndex(indexPath.row,
-                                     tag: model.tags!.tagToOrderArray()[indexPath.section])
+            switch self.sortModel {
+            case .tags:
+                book = model.bookAtIndex(indexPath.row,
+                                         tag: model.tags!.tagToOrderArray()[indexPath.section])
+            case .books:
+                book = model.bookAtIndexGlobal(indexPath.row)
+            }
+            
         }
         
-        /* Esto es con celda estándar */
-        /*
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId)
-        if (cell==nil){
-            // Opcional vacio se crea a pelo
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-        }
-        // Sincronizamos personaje -> celda
-        cell?.imageView?.image = book?.imgFile
-        cell?.textLabel?.text = book?.title
-        cell?.detailTextLabel?.text = book?.authors.description
-        */
         
         let cell = tableView.dequeueReusableCellWithIdentifier("CellBook", forIndexPath: indexPath) as? BookCellViewTableViewCell
         cell?.bookImg.image = book?.imgFile
@@ -184,11 +178,23 @@ class LibraryViewController: UITableViewController {
             if section == 0 {
                 return "Favorites"
             }else{
-                return model.tags!.tagToOrderArray()[section-1]
+                switch sortModel {
+                case .tags:
+                    return model.tags!.tagToOrderArray()[section-1]
+                case .books:
+                    return "Book List"
+                }
+                
             }
         }
         else{
-            return model.tags!.tagToOrderArray()[section]
+            switch sortModel {
+            case .tags:
+                return model.tags!.tagToOrderArray()[section]
+            case .books:
+                return "Book List"
+            }
+            
         }
     }
     
@@ -213,12 +219,32 @@ extension LibraryViewController:  BookViewControlerDelegate{
         // El fichero guarda 
         
         saveFavoritesFile(withFile: model.favorites)
-    
+        
         
         self.tableView.reloadData()
         
+        // Avisamos al delegado, que es la tabla del UI
+        delegate?.libraryViewController(self, needReload: true)
+        
         
     }
+    
+    
 }
+//MARK: - Extension order
+extension LibraryViewController{
+    enum SortingModes : Int{
+        case tags   =   0
+        case books  =   1
+    }
+}
+
+//MARK: - Protocol
+protocol LibraryViewControllerDelegate {
+    func libraryViewController(vc: LibraryViewController, needReload reload: Bool)
+    
+}
+
+
 
 
