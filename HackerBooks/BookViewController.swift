@@ -41,14 +41,19 @@ class BookViewController: UIViewController {
         self.tagsView.text = "Tags: \(model.tags.tagToOrderArray().description)"
         
         // Favorito
+        favButton.titleLabel?.hidden=true
+
         if model.isFavorite == true {
-            favButton.setTitle("No Fav", forState: UIControlState.Normal)
-            favButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+            favButton.setBackgroundImage(UIImage(named: "favorito.jpeg"), forState: UIControlState.Normal)
+            //favButton.setTitle("No Fav", forState: UIControlState.Normal)
+            //favButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
 
         }else{
-            favButton.setTitle("Favorite", forState: UIControlState.Normal)
-            favButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            favButton.setBackgroundImage(UIImage(named: "no_favorito.png"), forState: UIControlState.Normal)
+            //favButton.setTitle("Favorite", forState: UIControlState.Normal)
+            //favButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         }
+        
         
     }
     
@@ -64,14 +69,10 @@ class BookViewController: UIViewController {
     //MARK: IB Actions Fav & Read
     
     @IBAction func markFavorite(sender: AnyObject) {
-        if favButton.currentTitle == "Favorite"{
+        if model.isFavorite == false {
             model.setFavorite(true)
-            favButton.setTitle("No Fav", forState: UIControlState.Normal)
-            
         }else{
             model.setFavorite(false)
-            favButton.setTitle("Favorite", forState: UIControlState.Normal)
-            
         }
         syncModelWithView()
         // Mando al delegado el libro que quiero meter o quitar
@@ -91,6 +92,7 @@ class BookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.
+        favButton.titleLabel?.hidden=true
     }
 
     override func didReceiveMemoryWarning() {

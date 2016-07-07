@@ -41,8 +41,8 @@ class SetOrderView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.selectOrder.setTitle("Tag sort", forSegmentAtIndex: 0)
-        self.selectOrder.setTitle("Book sort", forSegmentAtIndex: 1)
+        self.selectOrder.setTitle("Sort by Tag", forSegmentAtIndex: 0)
+        self.selectOrder.setTitle("Sort by title", forSegmentAtIndex: 1)
         
         // El delegado para los datos la propia clase
         self.tableView.dataSource = self
