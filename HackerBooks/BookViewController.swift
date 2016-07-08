@@ -28,6 +28,8 @@ class BookViewController: UIViewController {
     }
     
     func syncModelWithView(){
+        
+        
         // La imagen
         self.imageView.image = model.imgFile
         
@@ -66,6 +68,7 @@ class BookViewController: UIViewController {
     
     @IBOutlet weak var authorsView: UILabel!
     
+    @IBOutlet weak var imageBoot: UIImageView!
     //MARK: IB Actions Fav & Read
     
     @IBAction func markFavorite(sender: AnyObject) {
@@ -146,6 +149,11 @@ class BookViewController: UIViewController {
         let info = notification.userInfo
         let book = info![BookKey] as? Book
         model = book!
+        // Quitamos la portada
+        if self.imageBoot.hidden == false {
+            self.imageBoot.hidden = true
+        }
+
         syncModelWithView()
     }
 }

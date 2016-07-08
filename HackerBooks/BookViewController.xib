@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="authorsView" destination="1rC-Na-61Y" id="jAW-eX-ceb"/>
                 <outlet property="favButton" destination="WQH-q3-LVW" id="NcO-yH-3WR"/>
+                <outlet property="imageBoot" destination="uPw-Ic-FjX" id="vrb-Wh-2O1"/>
                 <outlet property="imageView" destination="6LT-tt-Pke" id="FS7-NA-efg"/>
                 <outlet property="tagsView" destination="US5-CQ-XVE" id="RTR-Xb-9mO"/>
                 <outlet property="titleView" destination="2WX-0K-cFa" id="A33-n4-bVF"/>
@@ -64,6 +65,10 @@
                         <action selector="markFavorite:" destination="-1" eventType="touchUpInside" id="HY6-99-t5Y"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portada.jpg" id="uPw-Ic-FjX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="280" y="355"/>
@@ -71,6 +76,7 @@
     </objects>
     <resources>
         <image name="no_favorito.png" width="720" height="720"/>
+        <image name="portada.jpg" width="750" height="422"/>
         <image name="visorPdf.png" width="338" height="334"/>
     </resources>
 </document>
