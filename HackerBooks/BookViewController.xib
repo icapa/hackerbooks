@@ -65,7 +65,7 @@
                         <action selector="markFavorite:" destination="-1" eventType="touchUpInside" id="HY6-99-t5Y"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portada.jpg" id="uPw-Ic-FjX">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portada.png" id="uPw-Ic-FjX">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -76,7 +76,7 @@
     </objects>
     <resources>
         <image name="no_favorito.png" width="720" height="720"/>
-        <image name="portada.jpg" width="750" height="422"/>
+        <image name="portada.png" width="960" height="702"/>
         <image name="visorPdf.png" width="338" height="334"/>
     </resources>
 </document>
