@@ -57,6 +57,13 @@ class SetOrderView: UIViewController {
         // Le digo a la tabla original que soy su delegado para actualizar rápido los fav
         self.theTable.delegate = self
         
+        // Cambio algún formato de la tabla
+        self.tableView.separatorStyle = .SingleLine
+        self.tableView.separatorColor = UIColor.blueColor()
+        
+        self.title = "Library"
+        
+    
 
     }
 
@@ -70,7 +77,7 @@ class SetOrderView: UIViewController {
     }
 }
 //MARK: - Extension TableDataSource
-extension SetOrderView: UITableViewDataSource, UITableViewDelegate {
+extension SetOrderView: UITableViewDataSource {
    
     // MARK: - Table view data source
     
@@ -95,13 +102,22 @@ extension SetOrderView: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-  }
+}
 //MARK: - Delegates
-extension SetOrderView{
-    // Table View
+extension SetOrderView: UITableViewDelegate{
+    // Table View select row
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         theTable.tableView(tableView, didSelectRowAtIndexPath: indexPath)
     }
+    
+    // Format
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.blueColor()
+        let header : UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.whiteColor()
+        header.textLabel?.textAlignment = NSTextAlignment.Center
+    }
+    
 }
 
 extension SetOrderView: LibraryViewControllerDelegate{

@@ -96,6 +96,7 @@ class BookViewController: UIViewController {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.
         favButton.titleLabel?.hidden=true
+        self.title = "Book properties"
     }
 
     override func didReceiveMemoryWarning() {

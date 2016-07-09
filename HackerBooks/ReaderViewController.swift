@@ -43,6 +43,7 @@ class ReaderViewController: UIViewController {
     //MARK: - View life cycle
     override func viewDidLoad(){
         super.viewDidLoad()
+        self.title = "PDF Book"
         
     }
     override func viewDidAppear(animated: Bool) {

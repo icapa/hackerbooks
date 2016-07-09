@@ -76,7 +76,7 @@
     </objects>
     <resources>
         <image name="no_favorito.png" width="720" height="720"/>
-        <image name="portada.png" width="960" height="702"/>
+        <image name="portada.png" width="960" height="557"/>
         <image name="visorPdf.png" width="338" height="334"/>
     </resources>
 </document>
