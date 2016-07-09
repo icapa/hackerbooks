@@ -112,12 +112,23 @@ extension SetOrderView: UITableViewDelegate{
     
     // Format
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor.blueColor()
+        if (theTable.model.favorites.count>0){
+            if section==0{
+                view.tintColor = UIColor.redColor()
+            }
+            else{
+                view.tintColor = UIColor.blueColor()
+            }
+        }
+        else{
+            view.tintColor = UIColor.blueColor()
+        }
+        
         let header : UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.whiteColor()
         header.textLabel?.textAlignment = NSTextAlignment.Center
     }
-    
+
 }
 
 extension SetOrderView: LibraryViewControllerDelegate{
