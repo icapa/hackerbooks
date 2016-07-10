@@ -111,39 +111,7 @@ class BookViewController: UIViewController {
         edgesForExtendedLayout = .None
         self.syncModelWithView()
     }
-    /*
-    override func viewDidUnload() {
-        self.viewDidUnload()
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(self)
-
-    }
-    */
-
-    /*
-    override func viewDidUnload() {
-        super.viewDidUnLoad()
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(self)
-    }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(self)
-        
-    }*/
-    
- 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     //MARK: Notification
     func bookDidChange(notification: NSNotification){
         // La info de la notificacion

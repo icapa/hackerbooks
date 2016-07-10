@@ -12,15 +12,17 @@ class SetOrderView: UIViewController {
     
     @IBOutlet weak var selectOrder: UISegmentedControl!
 
-    @IBOutlet weak var tableView: UITableView!
+    //@IBOutlet weak var tableView: UITableView!
     
     @IBAction func selectOrderChange(sender: AnyObject) {
         
         self.theTable.sortModel = LibraryViewController.SortingModes(rawValue: sender.selectedSegmentIndex)!
         self.theTable.tableView.reloadData()
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
         
     }
+    
+    
     
     //MARK: - Properties
     let theTable : LibraryViewController
@@ -43,28 +45,10 @@ class SetOrderView: UIViewController {
 
         self.selectOrder.setTitle("Sort by Tag", forSegmentAtIndex: 0)
         self.selectOrder.setTitle("Sort by title", forSegmentAtIndex: 1)
-        
-        // El delegado para los datos la propia clase
-        self.tableView.dataSource = self
-        // El delegado para seleccionar elementos, etc...
-        self.tableView.delegate = self
-        
-        let cellNib = UINib(nibName: "BookCellViewTableViewCell", bundle: nil)
-        self.tableView.registerNib(cellNib, forCellReuseIdentifier: "CellBook")
-        
-        tableView.rowHeight = self.theTable.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(index: 0))
-        
-        // Le digo a la tabla original que soy su delegado para actualizar rápido los fav
-        self.theTable.delegate = self
-        
-        // Cambio algún formato de la tabla
-        self.tableView.separatorStyle = .SingleLine
-        self.tableView.separatorColor = UIColor.blueColor()
-        
         self.title = "Library"
-        
-    
-
+        // En un subview meto el LibraryController que tengo hecho
+        addTableControllerView()
+       
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -75,65 +59,32 @@ class SetOrderView: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-}
-//MARK: - Extension TableDataSource
-extension SetOrderView: UITableViewDataSource {
-   
-    // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return theTable.numberOfSectionsInTableView(tableView)
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theTable.tableView(tableView, numberOfRowsInSection: section)
-    }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return theTable.tableView(tableView, cellForRowAtIndexPath: indexPath)
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return theTable.tableView(tableView, titleForHeaderInSection: section)
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.reloadData()
+    // MARK: - Add Subview
+    func addTableControllerView(){
         
-    }
-    
-    
-}
-//MARK: - Delegates
-extension SetOrderView: UITableViewDelegate{
-    // Table View select row
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        theTable.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    }
-    
-    // Format
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if (theTable.model.favorites.count>0){
-            if section==0{
-                view.tintColor = UIColor.redColor()
-            }
-            else{
-                view.tintColor = UIColor.blueColor()
-            }
-        }
-        else{
-            view.tintColor = UIColor.blueColor()
-        }
+        let segBounds = self.selectOrder.bounds
+        let totalBounds = self.navigationController?.view.bounds
         
-        let header : UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.whiteColor()
-        header.textLabel?.textAlignment = NSTextAlignment.Center
+        let position = CGPoint(x: segBounds.origin.x, y: segBounds.origin.y+segBounds.size.height)
+        let totalSpace = CGSize(width: segBounds.size.width,
+                                height: totalBounds!.size.height)
+        
+        // Hasta aquí calculo donde dibujar la vista
+        let cgRect = CGRect(origin: position, size: totalSpace)
+        
+        let tV = UIScrollView(frame: cgRect)
+       
+        // Modifico los bordes del tableView para que se ajuste bien
+        self.theTable.tableView.frame = tV.frame
+        self.theTable.tableView.bounds = tV.bounds
+        
+        // Añado la subvista al uiview intermedio
+        tV.addSubview(self.theTable.tableView)
+        
+        // Inserto la vista en el uiview principal
+        self.view.addSubview(tV)
     }
 
+    
 }
-
-extension SetOrderView: LibraryViewControllerDelegate{
-    func libraryViewController(vc: LibraryViewController, needReload reload: Bool) {
-        self.tableView.reloadData()
-    }
-}
-

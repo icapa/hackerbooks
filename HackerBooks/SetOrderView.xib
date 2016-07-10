@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetOrderView" customModule="HackerBooks" customModuleProvider="target">
             <connections>
                 <outlet property="selectOrder" destination="VQk-jK-DUm" id="Ran-M5-qSs"/>
-                <outlet property="tableView" destination="C61-KQ-aB1" id="fOF-1t-HRy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,11 +27,6 @@
                         <action selector="selectOrderChange:" destination="-1" eventType="valueChanged" id="KSz-F5-s75"/>
                     </connections>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="C61-KQ-aB1">
-                    <rect key="frame" x="0.0" y="31" width="320" height="537"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="251" y="355"/>

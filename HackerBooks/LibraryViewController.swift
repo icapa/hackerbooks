@@ -18,9 +18,6 @@ class LibraryViewController: UITableViewController {
     let model : Library
     var sortModel : SortingModes
     
-    //MARK: - Genero un delegado para avisar a la tabla de la vista ordenada
-    var delegate: LibraryViewControllerDelegate?
-    
     
     //MARK: - Initialization
     init(model: Library){
@@ -41,12 +38,6 @@ class LibraryViewController: UITableViewController {
         edgesForExtendedLayout = .None
         
         
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        //addHeaderView()
     }
     
     //MARK: Tabke view delegate
@@ -200,7 +191,37 @@ class LibraryViewController: UITableViewController {
     
     //MARK: - Table presentation
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath)->CGFloat{
-        return 80.0
+        return 75.0
+    }
+    
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+     
+        if model.favorites.count>0{
+            if section==0{
+                view.tintColor = UIColor.redColor()
+            }
+            else{
+                view.tintColor = UIColor.blueColor()
+            }
+        }
+        else{
+            view.tintColor = UIColor.blueColor()
+        }
+    
+       
+     
+        let title = UILabel()
+        title.textColor = UIColor.whiteColor()
+        title.textAlignment = NSTextAlignment.Left
+     
+    
+     
+        let header : UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        
+        header.textLabel?.textColor = title.textColor
+        header.textLabel?.textAlignment = title.textAlignment
+ 
     }
     
 }
@@ -214,21 +235,13 @@ extension LibraryViewController:  BookViewControlerDelegate{
             model.remoteBookInTag("Favorites", withBook: book)
             model.favorites.remove(book.title)
         }
-        // Habría que guardar en fichero para la siguiente vez
         
-        // El fichero guarda 
-        
+        // El fichero guarda
         saveFavoritesFile(withFile: model.favorites)
         
         
         self.tableView.reloadData()
-        
-        // Avisamos al delegado, que es la tabla del UI
-        delegate?.libraryViewController(self, needReload: true)
-        
-        
     }
-    
     
 }
 //MARK: - Extension order
@@ -238,13 +251,6 @@ extension LibraryViewController{
         case books  =   1
     }
 }
-
-//MARK: - Protocol
-protocol LibraryViewControllerDelegate {
-    func libraryViewController(vc: LibraryViewController, needReload reload: Bool)
-    
-}
-
 
 
 
