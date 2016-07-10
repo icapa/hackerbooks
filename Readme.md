@@ -41,4 +41,4 @@ Estos son algunos de los extras que he añadido:
 * La carga de los PDF se hace en backgound por GCD así veo el activity en el visor mientras carga.
 * Se ha implementado la ordenación de libros por tags o por título, seleccionable con un "Segmented Control"
 * Botones con estrella que cambia de color al incluirlo/quitarlo en favorito. Icono de PDF para lectura y descarga (si no está descargado)
-
+* Para monetizar la aplicación se podria añadir la venta de libros por ejemplo.
