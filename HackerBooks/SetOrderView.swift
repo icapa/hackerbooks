@@ -46,6 +46,9 @@ class SetOrderView: UIViewController {
         self.selectOrder.setTitle("Sort by Tag", forSegmentAtIndex: 0)
         self.selectOrder.setTitle("Sort by title", forSegmentAtIndex: 1)
         self.title = "Library"
+        
+        self.selectOrder.layer.cornerRadius = 0.0
+        self.selectOrder.layer.borderWidth = 0
         // En un subview meto el LibraryController que tengo hecho
         addTableControllerView()
        
@@ -66,7 +69,11 @@ class SetOrderView: UIViewController {
         let segBounds = self.selectOrder.bounds
         let totalBounds = self.navigationController?.view.bounds
         
-        let position = CGPoint(x: segBounds.origin.x, y: segBounds.origin.y+segBounds.size.height)
+        
+        
+        
+        //let position = CGPoint(x: segBounds.origin.x, y: segBounds.origin.y+segBounds.size.height)
+        let position = CGPoint(x: segBounds.origin.x, y: segBounds.origin.y+segBounds.size.height/2)
         let totalSpace = CGSize(width: segBounds.size.width,
                                 height: totalBounds!.size.height)
         

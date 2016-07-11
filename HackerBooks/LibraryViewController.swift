@@ -33,14 +33,14 @@ class LibraryViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         edgesForExtendedLayout = .None
-        
-        
     }
     
-    //MARK: Tabke view delegate
+    //MARK: Table view delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var book : Book?

@@ -74,10 +74,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Mostramos la ventana
         window?.makeKeyAndVisible()
         
-        //-- Tema de la ventanas
         
+        //MARK: - Appearance
         
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.barTintColor = UIColor.blueColor()
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
+        let segApe = UISegmentedControl.appearance()
+        segApe.tintColor = UIColor.blueColor()
+        segApe.backgroundColor = UIColor.whiteColor()
+        
+        let tableApe = UITableView.appearance()
+        tableApe.backgroundColor = UIColor.blueColor()
+
+        let att = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold",size: 16)!, forKey: NSFontAttributeName)
+        segApe.setTitleTextAttributes(att as [NSObject:AnyObject], forState: .Normal)
+        segApe.setTitleTextAttributes(att as [NSObject:AnyObject], forState: .Selected)
         
         return true
     }
@@ -103,7 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
 }
 
