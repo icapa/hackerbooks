@@ -85,6 +85,7 @@ class SetOrderView: UIViewController {
         // Modifico los bordes del tableView para que se ajuste bien
         self.theTable.tableView.frame = tV.frame
         self.theTable.tableView.bounds = tV.bounds
+        self.theTable.tableView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0)
         
         // Añado la subvista al uiview intermedio
         tV.addSubview(self.theTable.tableView)
