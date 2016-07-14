@@ -158,6 +158,11 @@ class LibraryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellBook", forIndexPath: indexPath) as? BookCellViewTableViewCell
         cell?.bookImg.image = book?.imgFile
         cell?.bookName.text = book?.title
+        if book?.isFavorite  == true{
+            cell?.backgroundColor = UIColor(red: 1, green: 0.8, blue: 0.8, alpha: 1)
+        }else{
+            cell?.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 1, alpha: 1)
+        }
         
         
         return cell!
@@ -193,7 +198,14 @@ class LibraryViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath)->CGFloat{
         return 75.0
     }
-    
+    /*
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        // Si es favorita
+        
+        
+        cell.backgroundColor=UIColor(colorLiteralRed: 0.5, green: 0.5, blue: 1, alpha: 1)
+    }
+    */
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
      
